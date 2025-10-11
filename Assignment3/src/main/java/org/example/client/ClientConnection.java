@@ -1,0 +1,24 @@
+package org.example.client;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.example.database.ApplicationDatabase;
+import org.springframework.stereotype.Component;
+
+@Setter
+@Getter
+@Slf4j
+@Component
+public class ClientConnection {
+    private ApplicationDatabase database;
+
+    public void disconnect() {
+        if (database == null || database.getName() == null) {
+            return;
+        }
+        String databaseName = database.getName();
+        setDatabase(null);
+        log.info("Disconnected from database {}.", databaseName);
+    }
+}

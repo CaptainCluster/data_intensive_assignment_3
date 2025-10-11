@@ -19,7 +19,7 @@ public class CLIRunner implements CommandLineRunner {
 
     @Override
     public void run(String[] args) {
-        databaseManager.createDatabases();
+        databaseManager.setUpDatabases();
         clientInteractions.startClientInteractionLoop();
     }
 }
