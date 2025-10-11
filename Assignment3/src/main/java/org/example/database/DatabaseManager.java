@@ -27,11 +27,16 @@ public class DatabaseManager {
     public void setUpDatabases() {
         log.info("Getting the databases ready...");
         databases = List.of(
-                ApplicationDatabase.builder().name(DB_ALPHA).build(),
-                ApplicationDatabase.builder().name(DB_BRAVO).build(),
-                ApplicationDatabase.builder().name(DB_CHARLIE).build()
+                ApplicationDatabase.builder().name(DB_ALPHA).url(System.getProperty("DB_URL_1")).build(),
+                ApplicationDatabase.builder().name(DB_BRAVO).url(System.getProperty("DB_URL_2")).build(),
+                ApplicationDatabase.builder().name(DB_CHARLIE).url(System.getProperty("DB_URL_3")).build()
         );
+        establishDatabaseConnections();
         log.info("The databases are on.");
+    }
+
+    private void establishDatabaseConnections() {
+        databases.forEach(ApplicationDatabase::establishConnection);
     }
 
     public void handleClientDatabaseSelection() {
@@ -60,7 +65,6 @@ public class DatabaseManager {
             log.warn("No databases were found.");
             return;
         }
-
         for (int i = 0; i < databases.size(); i++) {
             log.info("Database {} - {}", i+1, databases.get(i).getName());
         }

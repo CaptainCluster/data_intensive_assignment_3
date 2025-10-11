@@ -19,6 +19,9 @@ dependencies {
     // Spring
     implementation("org.springframework.boot:spring-boot-starter")
 
+    // Postgresql
+    implementation("org.postgresql:postgresql")
+
     // Environmental variables
     implementation("io.github.cdimascio:java-dotenv:5.2.2")
 
