@@ -21,4 +21,12 @@ public class ClientConnection {
         setDatabase(null);
         log.info("Disconnected from database {}.", databaseName);
     }
+
+    public void status() {
+        if (database == null) {
+            log.info("You are not connected to a database.");
+            return;
+        }
+        log.info("Your are connected to database {}", database.getName());
+    }
 }

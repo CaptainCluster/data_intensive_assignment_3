@@ -31,12 +31,8 @@ public class DatabaseManager {
                 ApplicationDatabase.builder().name(DB_BRAVO).url(System.getProperty("DB_URL_2")).build(),
                 ApplicationDatabase.builder().name(DB_CHARLIE).url(System.getProperty("DB_URL_3")).build()
         );
-        establishDatabaseConnections();
-        log.info("The databases are on.");
-    }
-
-    private void establishDatabaseConnections() {
         databases.forEach(ApplicationDatabase::establishConnection);
+        log.info("The databases are on.");
     }
 
     public void handleClientDatabaseSelection() {

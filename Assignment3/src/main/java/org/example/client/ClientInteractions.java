@@ -12,6 +12,7 @@ import java.util.Scanner;
 @Component
 public class ClientInteractions {
     @Resource private DatabaseManager databaseManager;
+    @Resource private ClientConnection clientConnection;
     private final Scanner scanner = new Scanner(System.in);
 
     public void startClientInteractionLoop() {
@@ -26,6 +27,7 @@ public class ClientInteractions {
                 case "CONNECT" -> databaseManager.handleClientDatabaseSelection();
                 case "DATABASES" -> databaseManager.listDatabasesByName();
                 case "HELP" -> listCommands();
+                case "STATUS" -> clientConnection.status();
                 case "EXIT" -> System.exit(0);
                 default -> log.warn("Invalid input detected!");
             }
@@ -37,6 +39,7 @@ public class ClientInteractions {
                 "CONNECT", "Connect to a database",
                 "DATABASES", "List databases",
                 "HELP", "List available commands",
+                "STATUS", "Prints the status regarding current connection",
                 "EXIT", "End program"
         );
 

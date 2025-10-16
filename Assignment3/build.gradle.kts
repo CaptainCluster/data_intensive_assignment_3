@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("org.springframework.boot") version "3.5.3"
     id("io.spring.dependency-management") version "1.1.5"
+    id("org.flywaydb.flyway") version "11.10.2"
 }
 
 group = "org.example"
@@ -22,8 +23,15 @@ dependencies {
     // Postgresql
     implementation("org.postgresql:postgresql")
 
+    // Flyway
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-postgresql")
+
     // Environmental variables
     implementation("io.github.cdimascio:java-dotenv:5.2.2")
+
+    // Jooq for database queries
+    implementation("org.jooq:jooq:3.20.8")
 
     // Project Lombok
     // More convenient than System.out.println
