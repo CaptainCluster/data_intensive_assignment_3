@@ -1,34 +1,43 @@
+-- Serial type
+-- https://stackoverflow.com/questions/70249351/error-null-value-in-column-id-of-relation-xxx-violates-not-null-constraint
+
+
 CREATE TABLE IF NOT EXISTS Shop (
-    id          INT PRIMARY KEY,
-    name        VARCHAR(255) NOT NULL,
-    location    VARCHAR(255) NOT NULL
+    id              SERIAL PRIMARY KEY,
+    name            VARCHAR(255) NOT NULL,
+    location        VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Warehouse (
-    id          INT PRIMARY KEY
-
+    id              SERIAL PRIMARY KEY,
+    shopId          INT UNIQUE,
+    FOREIGN KEY (shopId) REFERENCES Shop(id)
 );
 
 CREATE TABLE IF NOT EXISTS Product (
-    id          INT PRIMARY KEY,
-    name        VARCHAR(255) NOT NULL,
-    price       INT,
-    quantity    INT NOT NULL
+    id              SERIAL PRIMARY KEY,
+    name            VARCHAR(255) NOT NULL,
+    price           INT,
+    quantity        INT NOT NULL,
+    warehouseId     INT,
+    FOREIGN KEY (warehouseId) REFERENCES Warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS Employee (
-    id          INT PRIMARY KEY,
-    firstName   VARCHAR(255) NOT NULL,
-    lastName    VARCHAR(255) NOT NULL,
-    title       VARCHAR(255),
-    salary      INT NOT NULL,
-    shopId      INT,
+    id              SERIAL PRIMARY KEY,
+    firstName       VARCHAR(255) NOT NULL,
+    lastName        VARCHAR(255) NOT NULL,
+    title           VARCHAR(255),
+    salary          INT NOT NULL,
+    shopId          INT,
     FOREIGN KEY (shopId) REFERENCES Shop(id)
 );
 
 CREATE TABLE IF NOT EXISTS Incident (
-    id          INT PRIMARY KEY,
-    title       VARCHAR(255) NOT NULL,
-    description VARCHAR(255)
+    id              SERIAL PRIMARY KEY,
+    title           VARCHAR(255) NOT NULL,
+    description     VARCHAR(255),
+    shopId          INT UNIQUE,
+    FOREIGN KEY (shopId) REFERENCES Shop(id)
 );
 

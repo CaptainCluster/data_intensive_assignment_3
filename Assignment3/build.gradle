@@ -1,0 +1,107 @@
+plugins {
+    id("java")
+    id("org.springframework.boot") version "3.5.3"
+    id("io.spring.dependency-management") version "1.1.5"
+    id("org.flywaydb.flyway") version "11.10.2"
+    id("nu.studer.jooq") version "8.2"
+}
+
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    // Spring
+    implementation("org.springframework.boot:spring-boot-starter")
+
+    // Postgresql
+    implementation("org.postgresql:postgresql")
+
+    // Flyway
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-postgresql")
+
+    // Environmental variables
+    implementation("io.github.cdimascio:java-dotenv:5.2.2")
+
+    // JOOQ
+    implementation("org.jooq:jooq:3.19.7")
+
+    // Project Lombok
+    // More convenient than System.out.println
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
+    implementation("org.slf4j:slf4j-api:2.0.9")
+    implementation("ch.qos.logback:logback-classic:1.5.18")
+
+    jooqGenerator("org.postgresql:postgresql")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+
+// Source: https://github.com/etiennestuder/gradle-jooq-plugin?tab=readme-ov-file
+jooq {
+    version.set("3.20.5")
+    edition.set(nu.studer.gradle.jooq.JooqEdition.OSS)
+
+    configurations {
+        main {  // name of the jOOQ configuration
+
+            generationTool {
+                logging = org.jooq.meta.jaxb.Logging.WARN
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://localhost:5432/db1'
+                    user = 'postgres'
+                    password = 'password'
+                    properties {
+                        property {
+                            key = 'PAGE_SIZE'
+                            value = 2048
+                        }
+                    }
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        forcedTypes {
+                            forcedType {
+                                name = 'varchar'
+                                includeExpression = '.*'
+                                includeTypes = 'JSONB?'
+                            }
+                            forcedType {
+                                name = 'varchar'
+                                includeExpression = '.*'
+                                includeTypes = 'INET'
+                            }
+                            inputSchema = "public"
+                        }
+                    }
+                    generate {
+                        deprecated = false
+                        records = true
+                        immutablePojos = true
+                        fluentSetters = true
+                    }
+                    target {
+                        packageName = 'assignment'
+                        directory = 'src/generated/jooq'
+                    }
+                    strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                }
+            }
+        }
+    }
+}

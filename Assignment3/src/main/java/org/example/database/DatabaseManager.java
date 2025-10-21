@@ -4,6 +4,7 @@ package org.example.database;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.example.client.ClientConnection;
+import org.jooq.impl.DSL;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -70,8 +71,13 @@ public class DatabaseManager {
         try {
             clientConnection.disconnect();
             clientConnection.setDatabase(databases.get(databaseIndex));
+            log.info(clientConnection.getDatabase().getUrl());
+            clientConnection.setDslContext(DSL.using(
+                    clientConnection.getDatabase().getConnection()
+            ));
             log.info("Connection has been established to database {}.", clientConnection.getDatabase().getName());
         } catch (Exception e) {  // Mainly to catch issues due to handling via index
+            clientConnection.disconnect();
             log.warn("Encountered an error when attempting to establish a connection to database: ", e);
         }
     }

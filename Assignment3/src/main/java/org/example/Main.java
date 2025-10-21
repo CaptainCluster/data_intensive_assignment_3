@@ -1,5 +1,6 @@
 package org.example;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.example.utils.FlywayMigrate;
 import org.example.utils.SystemVariablePlacer;

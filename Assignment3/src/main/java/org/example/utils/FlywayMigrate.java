@@ -2,7 +2,6 @@ package org.example.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Here are some sources I used to help me set up Flyway for multiple databases

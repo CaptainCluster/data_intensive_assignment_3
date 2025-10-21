@@ -21,7 +21,6 @@ public class ApplicationDatabase {
     private final String username = System.getProperty("DB_USERNAME");
     private final String password = System.getProperty("DB_PASSWORD");
 
-
     /**
      * Database connection source that I used
      * https://javanexus.com/blog/mastering-multi-db-connections-java
