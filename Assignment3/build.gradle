@@ -1,3 +1,12 @@
+import org.flywaydb.gradle.task.FlywayMigrateTask
+
+// Source I used for the buildscript that helped solve flywayMigrate issue
+// https://github.com/flyway/flyway/issues/3918
+buildscript {
+    dependencies {
+        classpath("org.flywaydb:flyway-database-postgresql:11.3.0")
+    }
+}
 plugins {
     id("java")
     id("org.springframework.boot") version "3.5.3"
@@ -13,6 +22,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -26,7 +36,7 @@ dependencies {
 
     // Flyway
     implementation("org.flywaydb:flyway-core")
-    implementation("org.flywaydb:flyway-database-postgresql")
+
 
     // Environmental variables
     implementation("io.github.cdimascio:java-dotenv:5.2.2")
@@ -48,6 +58,21 @@ tasks.test {
     useJUnitPlatform()
 }
 
+task migrate1(type: FlywayMigrateTask) {
+    url = "jdbc:postgresql://localhost:5432/db1"
+    user = "postgres"
+    password = "password"
+}
+task migrate2(type: FlywayMigrateTask) {
+    url = "jdbc:postgresql://localhost:5432/db2"
+    user = "postgres"
+    password = "password"
+}
+task migrate3(type: FlywayMigrateTask) {
+    url = "jdbc:postgresql://localhost:5432/db3"
+    user = "postgres"
+    password = "password"
+}
 
 // Source: https://github.com/etiennestuder/gradle-jooq-plugin?tab=readme-ov-file
 jooq {

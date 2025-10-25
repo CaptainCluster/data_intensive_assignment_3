@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS Employee (
     title           VARCHAR(255),
     salary          INT NOT NULL,
     shopId          INT,
+    isFired         BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (shopId) REFERENCES Shop(id)
 );
 

@@ -21,6 +21,7 @@ public class Employee implements Serializable {
     private final String title;
     private final Integer salary;
     private final Integer shopid;
+    private final Boolean isfired;
 
     public Employee(Employee value) {
         this.id = value.id;
@@ -29,6 +30,7 @@ public class Employee implements Serializable {
         this.title = value.title;
         this.salary = value.salary;
         this.shopid = value.shopid;
+        this.isfired = value.isfired;
     }
 
     public Employee(
@@ -37,7 +39,8 @@ public class Employee implements Serializable {
         String lastname,
         String title,
         Integer salary,
-        Integer shopid
+        Integer shopid,
+        Boolean isfired
     ) {
         this.id = id;
         this.firstname = firstname;
@@ -45,6 +48,7 @@ public class Employee implements Serializable {
         this.title = title;
         this.salary = salary;
         this.shopid = shopid;
+        this.isfired = isfired;
     }
 
     /**
@@ -87,6 +91,13 @@ public class Employee implements Serializable {
      */
     public Integer getShopid() {
         return this.shopid;
+    }
+
+    /**
+     * Getter for <code>public.employee.isfired</code>.
+     */
+    public Boolean getIsfired() {
+        return this.isfired;
     }
 
     @Override
@@ -134,6 +145,12 @@ public class Employee implements Serializable {
         }
         else if (!this.shopid.equals(other.shopid))
             return false;
+        if (this.isfired == null) {
+            if (other.isfired != null)
+                return false;
+        }
+        else if (!this.isfired.equals(other.isfired))
+            return false;
         return true;
     }
 
@@ -147,6 +164,7 @@ public class Employee implements Serializable {
         result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
         result = prime * result + ((this.salary == null) ? 0 : this.salary.hashCode());
         result = prime * result + ((this.shopid == null) ? 0 : this.shopid.hashCode());
+        result = prime * result + ((this.isfired == null) ? 0 : this.isfired.hashCode());
         return result;
     }
 
@@ -160,6 +178,7 @@ public class Employee implements Serializable {
         sb.append(", ").append(title);
         sb.append(", ").append(salary);
         sb.append(", ").append(shopid);
+        sb.append(", ").append(isfired);
 
         sb.append(")");
         return sb.toString();
