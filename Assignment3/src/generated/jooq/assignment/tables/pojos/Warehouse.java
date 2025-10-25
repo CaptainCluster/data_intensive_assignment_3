@@ -17,18 +17,22 @@ public class Warehouse implements Serializable {
 
     private final Integer id;
     private final Integer shopid;
+    private final Integer quantity;
 
     public Warehouse(Warehouse value) {
         this.id = value.id;
         this.shopid = value.shopid;
+        this.quantity = value.quantity;
     }
 
     public Warehouse(
         Integer id,
-        Integer shopid
+        Integer shopid,
+        Integer quantity
     ) {
         this.id = id;
         this.shopid = shopid;
+        this.quantity = quantity;
     }
 
     /**
@@ -43,6 +47,13 @@ public class Warehouse implements Serializable {
      */
     public Integer getShopid() {
         return this.shopid;
+    }
+
+    /**
+     * Getter for <code>public.warehouse.quantity</code>.
+     */
+    public Integer getQuantity() {
+        return this.quantity;
     }
 
     @Override
@@ -66,6 +77,12 @@ public class Warehouse implements Serializable {
         }
         else if (!this.shopid.equals(other.shopid))
             return false;
+        if (this.quantity == null) {
+            if (other.quantity != null)
+                return false;
+        }
+        else if (!this.quantity.equals(other.quantity))
+            return false;
         return true;
     }
 
@@ -75,6 +92,7 @@ public class Warehouse implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.shopid == null) ? 0 : this.shopid.hashCode());
+        result = prime * result + ((this.quantity == null) ? 0 : this.quantity.hashCode());
         return result;
     }
 
@@ -84,6 +102,7 @@ public class Warehouse implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(shopid);
+        sb.append(", ").append(quantity);
 
         sb.append(")");
         return sb.toString();

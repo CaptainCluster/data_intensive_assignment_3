@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS Shop (
 CREATE TABLE IF NOT EXISTS Warehouse (
     id              SERIAL PRIMARY KEY,
     shopId          INT UNIQUE,
+    quantity        INT NOT NULL,
     FOREIGN KEY (shopId) REFERENCES Shop(id)
 );
 
@@ -25,8 +26,7 @@ CREATE TABLE IF NOT EXISTS Product (
 
 CREATE TABLE IF NOT EXISTS Employee (
     id              SERIAL PRIMARY KEY,
-    firstName       VARCHAR(255) NOT NULL,
-    lastName        VARCHAR(255) NOT NULL,
+    name            VARCHAR(255) NOT NULL,
     title           VARCHAR(255),
     salary          INT NOT NULL,
     shopId          INT,

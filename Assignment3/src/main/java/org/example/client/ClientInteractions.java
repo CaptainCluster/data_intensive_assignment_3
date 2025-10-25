@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.database.DatabaseManager;
 import org.example.dto.ShopDTO;
 import org.example.repository.ShopRepository;
+import org.example.service.EmployeeService;
+import org.example.service.ShopService;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -15,6 +17,8 @@ import java.util.Scanner;
 public class ClientInteractions {
     @Resource private DatabaseManager databaseManager;
     @Resource private ClientConnection clientConnection;
+    @Resource private EmployeeService employeeService;
+    @Resource private ShopService shopService;
     @Resource private ShopRepository shopRepository;
     private final Scanner scanner = new Scanner(System.in);
 
@@ -31,6 +35,10 @@ public class ClientInteractions {
                 case "DATABASES" -> databaseManager.listDatabasesByName();
                 case "HELP" -> listCommands();
                 case "STATUS" -> clientConnection.status();
+
+                case "LIST SHOP" -> shopService.listAllShops();
+                case "HIRE EMPLOYEE" -> employeeService.hireEmployee();
+
                 case "TEST" -> shopRepository.createShop(ShopDTO.builder().name("TEST_NAME").location("TEST_LOCATION").build());
                 case "EXIT" -> System.exit(0);
                 default -> log.warn("Invalid input detected!");

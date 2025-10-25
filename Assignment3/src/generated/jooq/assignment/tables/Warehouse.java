@@ -18,7 +18,7 @@ import java.util.function.Function;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function3;
 import org.jooq.Identity;
 import org.jooq.InverseForeignKey;
 import org.jooq.Name;
@@ -27,7 +27,7 @@ import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row3;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -72,6 +72,11 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
      * The column <code>public.warehouse.shopid</code>.
      */
     public final TableField<WarehouseRecord, Integer> SHOPID = createField(DSL.name("shopid"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.warehouse.quantity</code>.
+     */
+    public final TableField<WarehouseRecord, Integer> QUANTITY = createField(DSL.name("quantity"), SQLDataType.INTEGER.nullable(false), this, "");
 
     private Warehouse(Name alias, Table<WarehouseRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -309,18 +314,18 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, Integer> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<Integer, Integer, Integer> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super Integer, ? super Integer, ? super Integer, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -328,7 +333,7 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Integer, ? super Integer, ? super Integer, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

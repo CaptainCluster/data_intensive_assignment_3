@@ -17,7 +17,7 @@ import java.util.function.Function;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function7;
+import org.jooq.Function6;
 import org.jooq.Identity;
 import org.jooq.InverseForeignKey;
 import org.jooq.Name;
@@ -26,7 +26,7 @@ import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row7;
+import org.jooq.Row6;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -68,14 +68,9 @@ public class Employee extends TableImpl<EmployeeRecord> {
     public final TableField<EmployeeRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>public.employee.firstname</code>.
+     * The column <code>public.employee.name</code>.
      */
-    public final TableField<EmployeeRecord, String> FIRSTNAME = createField(DSL.name("firstname"), SQLDataType.VARCHAR(255).nullable(false), this, "");
-
-    /**
-     * The column <code>public.employee.lastname</code>.
-     */
-    public final TableField<EmployeeRecord, String> LASTNAME = createField(DSL.name("lastname"), SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<EmployeeRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>public.employee.title</code>.
@@ -315,18 +310,18 @@ public class Employee extends TableImpl<EmployeeRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Integer, String, String, String, Integer, Integer, Boolean> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row6<Integer, String, String, Integer, Integer, Boolean> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function7<? super Integer, ? super String, ? super String, ? super String, ? super Integer, ? super Integer, ? super Boolean, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function6<? super Integer, ? super String, ? super String, ? super Integer, ? super Integer, ? super Boolean, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -334,7 +329,7 @@ public class Employee extends TableImpl<EmployeeRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function7<? super Integer, ? super String, ? super String, ? super String, ? super Integer, ? super Integer, ? super Boolean, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function6<? super Integer, ? super String, ? super String, ? super Integer, ? super Integer, ? super Boolean, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

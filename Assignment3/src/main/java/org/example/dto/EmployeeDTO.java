@@ -1,5 +1,6 @@
 package org.example.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,8 +11,9 @@ import org.jetbrains.annotations.NotNull;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ShopDTO {
+public class EmployeeDTO {
     private int id;
     @NotNull private String name;
-    @NotNull private String location;
+    private String title;
+    @NotNull private Integer salary;
 }

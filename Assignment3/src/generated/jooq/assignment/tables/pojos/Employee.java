@@ -16,8 +16,7 @@ public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Integer id;
-    private final String firstname;
-    private final String lastname;
+    private final String name;
     private final String title;
     private final Integer salary;
     private final Integer shopid;
@@ -25,8 +24,7 @@ public class Employee implements Serializable {
 
     public Employee(Employee value) {
         this.id = value.id;
-        this.firstname = value.firstname;
-        this.lastname = value.lastname;
+        this.name = value.name;
         this.title = value.title;
         this.salary = value.salary;
         this.shopid = value.shopid;
@@ -35,16 +33,14 @@ public class Employee implements Serializable {
 
     public Employee(
         Integer id,
-        String firstname,
-        String lastname,
+        String name,
         String title,
         Integer salary,
         Integer shopid,
         Boolean isfired
     ) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.name = name;
         this.title = title;
         this.salary = salary;
         this.shopid = shopid;
@@ -59,17 +55,10 @@ public class Employee implements Serializable {
     }
 
     /**
-     * Getter for <code>public.employee.firstname</code>.
+     * Getter for <code>public.employee.name</code>.
      */
-    public String getFirstname() {
-        return this.firstname;
-    }
-
-    /**
-     * Getter for <code>public.employee.lastname</code>.
-     */
-    public String getLastname() {
-        return this.lastname;
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -115,17 +104,11 @@ public class Employee implements Serializable {
         }
         else if (!this.id.equals(other.id))
             return false;
-        if (this.firstname == null) {
-            if (other.firstname != null)
+        if (this.name == null) {
+            if (other.name != null)
                 return false;
         }
-        else if (!this.firstname.equals(other.firstname))
-            return false;
-        if (this.lastname == null) {
-            if (other.lastname != null)
-                return false;
-        }
-        else if (!this.lastname.equals(other.lastname))
+        else if (!this.name.equals(other.name))
             return false;
         if (this.title == null) {
             if (other.title != null)
@@ -159,8 +142,7 @@ public class Employee implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.firstname == null) ? 0 : this.firstname.hashCode());
-        result = prime * result + ((this.lastname == null) ? 0 : this.lastname.hashCode());
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
         result = prime * result + ((this.salary == null) ? 0 : this.salary.hashCode());
         result = prime * result + ((this.shopid == null) ? 0 : this.shopid.hashCode());
@@ -173,8 +155,7 @@ public class Employee implements Serializable {
         StringBuilder sb = new StringBuilder("Employee (");
 
         sb.append(id);
-        sb.append(", ").append(firstname);
-        sb.append(", ").append(lastname);
+        sb.append(", ").append(name);
         sb.append(", ").append(title);
         sb.append(", ").append(salary);
         sb.append(", ").append(shopid);
