@@ -16,4 +16,6 @@ public class EmployeeDTO {
     @NotNull private String name;
     private String title;
     @NotNull private Integer salary;
+    private Integer shopId;
+    boolean isFired;
 }

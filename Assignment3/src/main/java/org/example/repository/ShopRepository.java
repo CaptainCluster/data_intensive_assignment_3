@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.example.client.ClientConnection;
 import org.example.dto.ShopDTO;
+import org.example.utils.DatabaseUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,9 +15,10 @@ import static assignment.Tables.SHOP;
 @Repository
 public class ShopRepository {
     @Resource private ClientConnection clientConnection;
+    @Resource private DatabaseUtils databaseUtils;
 
     public void createShop(ShopDTO shopDTO) {
-        if (shopDTO == null || clientConnection == null || clientConnection.getDslContext() == null) {
+        if (shopDTO == null || !databaseUtils.isValidConnection()) {
             return;
         }
         try {
@@ -32,7 +34,7 @@ public class ShopRepository {
     }
 
     public List<ShopDTO> fetchAllShops() {
-        if (clientConnection == null || clientConnection.getDslContext() == null) {
+        if (!databaseUtils.isValidConnection()) {
             return List.of();
         }
         try {
@@ -43,6 +45,22 @@ public class ShopRepository {
         } catch (Exception e) {
             log.warn("Failed to fetch shops.");
             return List.of();
+        }
+    }
+
+    public ShopDTO fetchShopById(int shopId) {
+        if (!databaseUtils.isValidConnection()) {
+            return null;
+        }
+        try {
+            return clientConnection
+                    .getDslContext()
+                    .selectFrom(SHOP)
+                    .where(SHOP.ID.eq(shopId))
+                    .fetchOneInto(ShopDTO.class);
+        } catch (Exception e) {
+            log.warn("Failed to fetch shops.");
+            return null;
         }
     }
 }

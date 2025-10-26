@@ -37,7 +37,12 @@ public class ClientInteractions {
                 case "STATUS" -> clientConnection.status();
 
                 case "LIST SHOP" -> shopService.listAllShops();
-                case "HIRE EMPLOYEE" -> employeeService.hireEmployee();
+
+                case "EMPLOYEE LIST" -> employeeService.listEmployees();
+                case "EMPLOYEE HIRE" -> employeeService.hireEmployee();
+                case "EMPLOYEE VACANT" -> employeeService.printVacantEmployees();
+                case "EMPLOYEE ASSIGN" -> employeeService.assignEmployee();
+                case "EMPLOYEE FIRE" -> employeeService.fireEmployee();
 
                 case "TEST" -> shopRepository.createShop(ShopDTO.builder().name("TEST_NAME").location("TEST_LOCATION").build());
                 case "EXIT" -> System.exit(0);
