@@ -19,28 +19,24 @@ public class Product implements Serializable {
     private final String name;
     private final Integer price;
     private final Integer quantity;
-    private final Integer warehouseid;
 
     public Product(Product value) {
         this.id = value.id;
         this.name = value.name;
         this.price = value.price;
         this.quantity = value.quantity;
-        this.warehouseid = value.warehouseid;
     }
 
     public Product(
         Integer id,
         String name,
         Integer price,
-        Integer quantity,
-        Integer warehouseid
+        Integer quantity
     ) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.warehouseid = warehouseid;
     }
 
     /**
@@ -69,13 +65,6 @@ public class Product implements Serializable {
      */
     public Integer getQuantity() {
         return this.quantity;
-    }
-
-    /**
-     * Getter for <code>public.product.warehouseid</code>.
-     */
-    public Integer getWarehouseid() {
-        return this.warehouseid;
     }
 
     @Override
@@ -111,12 +100,6 @@ public class Product implements Serializable {
         }
         else if (!this.quantity.equals(other.quantity))
             return false;
-        if (this.warehouseid == null) {
-            if (other.warehouseid != null)
-                return false;
-        }
-        else if (!this.warehouseid.equals(other.warehouseid))
-            return false;
         return true;
     }
 
@@ -128,7 +111,6 @@ public class Product implements Serializable {
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.price == null) ? 0 : this.price.hashCode());
         result = prime * result + ((this.quantity == null) ? 0 : this.quantity.hashCode());
-        result = prime * result + ((this.warehouseid == null) ? 0 : this.warehouseid.hashCode());
         return result;
     }
 
@@ -140,7 +122,6 @@ public class Product implements Serializable {
         sb.append(", ").append(name);
         sb.append(", ").append(price);
         sb.append(", ").append(quantity);
-        sb.append(", ").append(warehouseid);
 
         sb.append(")");
         return sb.toString();

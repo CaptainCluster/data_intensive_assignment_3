@@ -18,21 +18,25 @@ public class Warehouse implements Serializable {
     private final Integer id;
     private final Integer shopid;
     private final Integer quantity;
+    private final Boolean isfull;
 
     public Warehouse(Warehouse value) {
         this.id = value.id;
         this.shopid = value.shopid;
         this.quantity = value.quantity;
+        this.isfull = value.isfull;
     }
 
     public Warehouse(
         Integer id,
         Integer shopid,
-        Integer quantity
+        Integer quantity,
+        Boolean isfull
     ) {
         this.id = id;
         this.shopid = shopid;
         this.quantity = quantity;
+        this.isfull = isfull;
     }
 
     /**
@@ -54,6 +58,13 @@ public class Warehouse implements Serializable {
      */
     public Integer getQuantity() {
         return this.quantity;
+    }
+
+    /**
+     * Getter for <code>public.warehouse.isfull</code>.
+     */
+    public Boolean getIsfull() {
+        return this.isfull;
     }
 
     @Override
@@ -83,6 +94,12 @@ public class Warehouse implements Serializable {
         }
         else if (!this.quantity.equals(other.quantity))
             return false;
+        if (this.isfull == null) {
+            if (other.isfull != null)
+                return false;
+        }
+        else if (!this.isfull.equals(other.isfull))
+            return false;
         return true;
     }
 
@@ -93,6 +110,7 @@ public class Warehouse implements Serializable {
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.shopid == null) ? 0 : this.shopid.hashCode());
         result = prime * result + ((this.quantity == null) ? 0 : this.quantity.hashCode());
+        result = prime * result + ((this.isfull == null) ? 0 : this.isfull.hashCode());
         return result;
     }
 
@@ -103,6 +121,7 @@ public class Warehouse implements Serializable {
         sb.append(id);
         sb.append(", ").append(shopid);
         sb.append(", ").append(quantity);
+        sb.append(", ").append(isfull);
 
         sb.append(")");
         return sb.toString();

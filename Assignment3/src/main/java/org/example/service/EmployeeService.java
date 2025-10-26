@@ -123,10 +123,11 @@ public class EmployeeService {
         log.info("Here are all the vacant employees: ");
         employeeRepository.selectVacantEmployees()
                 .forEach(employeeDTO -> log.info(
-                        "id - {} | name - {} | title - {}",
+                        "id - {} | name - {} | title - {} | salary - {}",
                         employeeDTO.getId(),
                         employeeDTO.getName(),
-                        employeeDTO.getTitle()
+                        employeeDTO.getTitle(),
+                        employeeDTO.getSalary()
                 ));
     }
 }

@@ -6,27 +6,20 @@ package assignment.tables;
 
 import assignment.Keys;
 import assignment.Public;
-import assignment.tables.Warehouse.WarehousePath;
 import assignment.tables.records.ProductRecord;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Condition;
 import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Function5;
+import org.jooq.Function4;
 import org.jooq.Identity;
-import org.jooq.InverseForeignKey;
 import org.jooq.Name;
-import org.jooq.Path;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
-import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row5;
+import org.jooq.Row4;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -82,11 +75,6 @@ public class Product extends TableImpl<ProductRecord> {
      */
     public final TableField<ProductRecord, Integer> QUANTITY = createField(DSL.name("quantity"), SQLDataType.INTEGER.nullable(false), this, "");
 
-    /**
-     * The column <code>public.product.warehouseid</code>.
-     */
-    public final TableField<ProductRecord, Integer> WAREHOUSEID = createField(DSL.name("warehouseid"), SQLDataType.INTEGER, this, "");
-
     private Product(Name alias, Table<ProductRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }
@@ -116,39 +104,6 @@ public class Product extends TableImpl<ProductRecord> {
         this(DSL.name("product"), null);
     }
 
-    public <O extends Record> Product(Table<O> path, ForeignKey<O, ProductRecord> childPath, InverseForeignKey<O, ProductRecord> parentPath) {
-        super(path, childPath, parentPath, PRODUCT);
-    }
-
-    /**
-     * A subtype implementing {@link Path} for simplified path-based joins.
-     */
-    public static class ProductPath extends Product implements Path<ProductRecord> {
-
-        private static final long serialVersionUID = 1L;
-        public <O extends Record> ProductPath(Table<O> path, ForeignKey<O, ProductRecord> childPath, InverseForeignKey<O, ProductRecord> parentPath) {
-            super(path, childPath, parentPath);
-        }
-        private ProductPath(Name alias, Table<ProductRecord> aliased) {
-            super(alias, aliased);
-        }
-
-        @Override
-        public ProductPath as(String alias) {
-            return new ProductPath(DSL.name(alias), this);
-        }
-
-        @Override
-        public ProductPath as(Name alias) {
-            return new ProductPath(alias, this);
-        }
-
-        @Override
-        public ProductPath as(Table<?> alias) {
-            return new ProductPath(alias.getQualifiedName(), this);
-        }
-    }
-
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
@@ -162,23 +117,6 @@ public class Product extends TableImpl<ProductRecord> {
     @Override
     public UniqueKey<ProductRecord> getPrimaryKey() {
         return Keys.PRODUCT_PKEY;
-    }
-
-    @Override
-    public List<ForeignKey<ProductRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.PRODUCT__PRODUCT_WAREHOUSEID_FKEY);
-    }
-
-    private transient WarehousePath _warehouse;
-
-    /**
-     * Get the implicit join path to the <code>public.warehouse</code> table.
-     */
-    public WarehousePath warehouse() {
-        if (_warehouse == null)
-            _warehouse = new WarehousePath(this, Keys.PRODUCT__PRODUCT_WAREHOUSEID_FKEY, null);
-
-        return _warehouse;
     }
 
     @Override
@@ -305,18 +243,18 @@ public class Product extends TableImpl<ProductRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, String, Integer, Integer, Integer> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row4<Integer, String, Integer, Integer> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function5<? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super Integer, ? super String, ? super Integer, ? super Integer, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -324,7 +262,7 @@ public class Product extends TableImpl<ProductRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function5<? super Integer, ? super String, ? super Integer, ? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super String, ? super Integer, ? super Integer, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

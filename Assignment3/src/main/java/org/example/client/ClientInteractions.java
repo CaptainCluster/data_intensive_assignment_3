@@ -6,6 +6,7 @@ import org.example.database.DatabaseManager;
 import org.example.dto.ShopDTO;
 import org.example.repository.ShopRepository;
 import org.example.service.EmployeeService;
+import org.example.service.ProductService;
 import org.example.service.ShopService;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,8 @@ public class ClientInteractions {
     @Resource private EmployeeService employeeService;
     @Resource private ShopService shopService;
     @Resource private ShopRepository shopRepository;
+    @Resource private ProductService productService;
+
     private final Scanner scanner = new Scanner(System.in);
 
     public void startClientInteractionLoop() {
@@ -36,13 +39,19 @@ public class ClientInteractions {
                 case "HELP" -> listCommands();
                 case "STATUS" -> clientConnection.status();
 
-                case "LIST SHOP" -> shopService.listAllShops();
-
                 case "EMPLOYEE LIST" -> employeeService.listEmployees();
                 case "EMPLOYEE HIRE" -> employeeService.hireEmployee();
                 case "EMPLOYEE VACANT" -> employeeService.printVacantEmployees();
                 case "EMPLOYEE ASSIGN" -> employeeService.assignEmployee();
                 case "EMPLOYEE FIRE" -> employeeService.fireEmployee();
+
+                case "PRODUCT LIST" -> productService.listProducts();
+                case "PRODUCT RESTOCK" -> productService.restockProduct();
+                case "PRODUCT PRICE" -> productService.changeProductPrice();
+
+                case "SHOP LIST" -> shopService.listAllShops();
+                case "SHOP RENAME" -> shopService.renameShop();
+                case "SHOP RELOCATE" -> shopService.relocateShop();
 
                 case "TEST" -> shopRepository.createShop(ShopDTO.builder().name("TEST_NAME").location("TEST_LOCATION").build());
                 case "EXIT" -> System.exit(0);

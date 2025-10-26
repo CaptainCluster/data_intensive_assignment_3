@@ -6,7 +6,6 @@ package assignment.tables;
 
 import assignment.Keys;
 import assignment.Public;
-import assignment.tables.Product.ProductPath;
 import assignment.tables.Shop.ShopPath;
 import assignment.tables.records.WarehouseRecord;
 
@@ -18,7 +17,7 @@ import java.util.function.Function;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function3;
+import org.jooq.Function4;
 import org.jooq.Identity;
 import org.jooq.InverseForeignKey;
 import org.jooq.Name;
@@ -27,7 +26,7 @@ import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -77,6 +76,11 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
      * The column <code>public.warehouse.quantity</code>.
      */
     public final TableField<WarehouseRecord, Integer> QUANTITY = createField(DSL.name("quantity"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.warehouse.isfull</code>.
+     */
+    public final TableField<WarehouseRecord, Boolean> ISFULL = createField(DSL.name("isfull"), SQLDataType.BOOLEAN.defaultValue(DSL.field(DSL.raw("false"), SQLDataType.BOOLEAN)), this, "");
 
     private Warehouse(Name alias, Table<WarehouseRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -175,19 +179,6 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
             _shop = new ShopPath(this, Keys.WAREHOUSE__WAREHOUSE_SHOPID_FKEY, null);
 
         return _shop;
-    }
-
-    private transient ProductPath _product;
-
-    /**
-     * Get the implicit to-many join path to the <code>public.product</code>
-     * table
-     */
-    public ProductPath product() {
-        if (_product == null)
-            _product = new ProductPath(this, null, Keys.PRODUCT__PRODUCT_WAREHOUSEID_FKEY.getInverseKey());
-
-        return _product;
     }
 
     @Override
@@ -314,18 +305,18 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, Integer, Integer> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<Integer, Integer, Integer, Boolean> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function3<? super Integer, ? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function4<? super Integer, ? super Integer, ? super Integer, ? super Boolean, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -333,7 +324,7 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Integer, ? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super Integer, ? super Integer, ? super Integer, ? super Boolean, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

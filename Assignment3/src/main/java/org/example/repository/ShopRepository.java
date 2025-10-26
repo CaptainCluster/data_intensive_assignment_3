@@ -63,4 +63,28 @@ public class ShopRepository {
             return null;
         }
     }
+
+    public void updateName(int shopId, String shopName) {
+        if (!databaseUtils.isValidConnection()) {
+            return;
+        }
+        clientConnection
+                .getDslContext()
+                .update(SHOP)
+                .set(SHOP.NAME, shopName)
+                .where(SHOP.ID.eq(shopId))
+                .execute();
+    }
+
+    public void updateLocation(int shopId, String location) {
+        if (!databaseUtils.isValidConnection()) {
+            return;
+        }
+        clientConnection
+                .getDslContext()
+                .update(SHOP)
+                .set(SHOP.LOCATION, location)
+                .where(SHOP.ID.eq(shopId))
+                .execute();
+    }
 }

@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS Warehouse (
     id              SERIAL PRIMARY KEY,
     shopId          INT UNIQUE,
     quantity        INT NOT NULL,
+    isFull          BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (shopId) REFERENCES Shop(id)
 );
 
@@ -19,9 +20,7 @@ CREATE TABLE IF NOT EXISTS Product (
     id              SERIAL PRIMARY KEY,
     name            VARCHAR(255) NOT NULL,
     price           INT,
-    quantity        INT NOT NULL,
-    warehouseId     INT,
-    FOREIGN KEY (warehouseId) REFERENCES Warehouse(id)
+    quantity        INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Employee (
