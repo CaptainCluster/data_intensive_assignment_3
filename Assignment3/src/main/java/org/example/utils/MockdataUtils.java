@@ -245,7 +245,96 @@ public class MockdataUtils {
         }
         generateCommonMockData();
 
+        // Five shops
+        ShopDTO shopDTO1 = shopRepository.createShop(
+                ShopDTO.builder().name("Swiss Ski Store").location("Bern, Switzerland").build()
+        );
+        ShopDTO shopDTO2 = shopRepository.createShop(
+                ShopDTO.builder().name("Brussels Bakery").location("Brussels, Belgium").build()
+        );
+        ShopDTO shopDTO3 = shopRepository.createShop(
+                ShopDTO.builder().name("Amsterdam Hamsterdom").location("Amsterdam, Netherlands").build()
+        );
+        ShopDTO shopDTO4 = shopRepository.createShop(
+                ShopDTO.builder().name("Hokkaido Sushi").location("Hokkaido, Japan").build()
+        );
+        ShopDTO shopDTO5 = shopRepository.createShop(
+                ShopDTO.builder().name("Brainrot Burgers").location("Pyongyang, North Korea").build()
+        );
 
+        // Five products
+        productRepository.createProduct(
+                ProductDTO.builder().name("Pepperoni pizza").price(6).quantity(32).build()
+        );
+        productRepository.createProduct(
+                ProductDTO.builder().name("Acoustic Guitar").price(46).quantity(2).build()
+        );
+        productRepository.createProduct(
+                ProductDTO.builder().name("Band merch - T-Shirt").price(23).quantity(0).build()
+        );
+        productRepository.createProduct(
+                ProductDTO.builder().name("Data-Intensive Systems learning material bundle").price(200000).quantity(2).build()
+        );
+        productRepository.createProduct(
+                ProductDTO.builder().name("Plushy toy").price(22).quantity(2).build()
+        );
+
+        // Five warehouses
+        warehouseRepository.createWarehouse(
+                WarehouseDTO.builder().shopId(shopDTO1.getId()).isFull(Boolean.TRUE)
+                        .quantity(300).build());
+        warehouseRepository.createWarehouse(
+                WarehouseDTO.builder().shopId(shopDTO1.getId()).isFull(Boolean.FALSE)
+                        .quantity(320).build());
+        warehouseRepository.createWarehouse(
+                WarehouseDTO.builder().shopId(shopDTO1.getId()).isFull(Boolean.TRUE)
+                        .quantity(340).build());
+        warehouseRepository.createWarehouse(
+                WarehouseDTO.builder().shopId(shopDTO3.getId()).isFull(Boolean.FALSE)
+                        .quantity(310).build());
+        warehouseRepository.createWarehouse(
+                WarehouseDTO.builder().shopId(shopDTO3.getId()).isFull(Boolean.TRUE)
+                        .quantity(333).build());
+        warehouseRepository.createWarehouse(
+                WarehouseDTO.builder().shopId(shopDTO4.getId()).isFull(Boolean.FALSE)
+                        .quantity(310).build());
+
+        // Five employees
+        employeeRepository.createEmployee(
+                EmployeeDTO.builder().salary(3600).title("Security").name("Porky Pig").isFired(Boolean.FALSE).shopId(shopDTO1.getId()).build()
+        );
+        employeeRepository.createEmployee(
+                EmployeeDTO.builder().salary(4000).title("Security").name("Wario Warson").isFired(Boolean.FALSE).shopId(shopDTO2.getId()).build()
+        );
+        employeeRepository.createEmployee(
+                EmployeeDTO.builder().salary(4321).title("Webmaster").name("Jonathan Jones").isFired(Boolean.FALSE).shopId(shopDTO2.getId()).build()
+        );
+        employeeRepository.createEmployee(
+                EmployeeDTO.builder().salary(2000).title("Cashier").name("Kenny from South Park").isFired(Boolean.TRUE).shopId(shopDTO3.getId()).build()
+        );
+        employeeRepository.createEmployee(
+                EmployeeDTO.builder().salary(2222).title("Manager").name("Gustavo Gambino").isFired(Boolean.FALSE).shopId(shopDTO3.getId()).build()
+        );
+        employeeRepository.createEmployee(
+                EmployeeDTO.builder().salary(5555).title("Cashier").name("Henry Harris").isFired(Boolean.TRUE).shopId(shopDTO3.getId()).build()
+        );
+
+        // Five incidents
+        incidentRepository.createIncident(
+                IncidentDTO.builder().title("Kenny fired!?").description("Oh my god! They fired Kenny!").isHandled(Boolean.FALSE).shopId(shopDTO1.getId()).build()
+        );
+        incidentRepository.createIncident(
+                IncidentDTO.builder().title("Coffee spilled on company laptop").description("Keyboard smells and doesn't work. Device needs replacing?").isHandled(Boolean.FALSE).shopId(shopDTO1.getId()).build()
+        );
+        incidentRepository.createIncident(
+                IncidentDTO.builder().title("Jonathan Jones manic laughter").description("Jonathan Jones can be heard laughing and it creeps out customers. Please ask him what's wrong!").isHandled(Boolean.FALSE).shopId(shopDTO1.getId()).build()
+        );
+        incidentRepository.createIncident(
+                IncidentDTO.builder().title("Bigfoot arrested").description("Bigfoot has struck our store. He did not get away with it this time!").isHandled(Boolean.TRUE).shopId(shopDTO1.getId()).build()
+        );
+        incidentRepository.createIncident(
+                IncidentDTO.builder().title("People sleeping in the building.").description("We need better security to stop people from sleeping in our store.").isHandled(Boolean.FALSE).shopId(shopDTO3.getId()).build()
+        );
     }
 
     /**
