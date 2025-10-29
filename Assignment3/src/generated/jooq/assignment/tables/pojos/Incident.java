@@ -19,24 +19,28 @@ public class Incident implements Serializable {
     private final String title;
     private final String description;
     private final Integer shopid;
+    private final Boolean ishandled;
 
     public Incident(Incident value) {
         this.id = value.id;
         this.title = value.title;
         this.description = value.description;
         this.shopid = value.shopid;
+        this.ishandled = value.ishandled;
     }
 
     public Incident(
         Integer id,
         String title,
         String description,
-        Integer shopid
+        Integer shopid,
+        Boolean ishandled
     ) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.shopid = shopid;
+        this.ishandled = ishandled;
     }
 
     /**
@@ -65,6 +69,13 @@ public class Incident implements Serializable {
      */
     public Integer getShopid() {
         return this.shopid;
+    }
+
+    /**
+     * Getter for <code>public.incident.ishandled</code>.
+     */
+    public Boolean getIshandled() {
+        return this.ishandled;
     }
 
     @Override
@@ -100,6 +111,12 @@ public class Incident implements Serializable {
         }
         else if (!this.shopid.equals(other.shopid))
             return false;
+        if (this.ishandled == null) {
+            if (other.ishandled != null)
+                return false;
+        }
+        else if (!this.ishandled.equals(other.ishandled))
+            return false;
         return true;
     }
 
@@ -111,6 +128,7 @@ public class Incident implements Serializable {
         result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
         result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
         result = prime * result + ((this.shopid == null) ? 0 : this.shopid.hashCode());
+        result = prime * result + ((this.ishandled == null) ? 0 : this.ishandled.hashCode());
         return result;
     }
 
@@ -122,6 +140,7 @@ public class Incident implements Serializable {
         sb.append(", ").append(title);
         sb.append(", ").append(description);
         sb.append(", ").append(shopid);
+        sb.append(", ").append(ishandled);
 
         sb.append(")");
         return sb.toString();

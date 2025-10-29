@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.database.DatabaseManager;
 import org.example.dto.ShopDTO;
 import org.example.repository.ShopRepository;
-import org.example.service.EmployeeService;
-import org.example.service.ProductService;
-import org.example.service.ShopService;
-import org.example.service.WarehouseService;
+import org.example.service.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -24,6 +21,7 @@ public class ClientInteractions {
     @Resource private ShopRepository shopRepository;
     @Resource private ProductService productService;
     @Resource private WarehouseService warehouseService;
+    @Resource private IncidentService incidentService;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -47,6 +45,10 @@ public class ClientInteractions {
                     case "EMPLOYEE VACANT" -> employeeService.printVacantEmployees();
                     case "EMPLOYEE ASSIGN" -> employeeService.assignEmployee();
                     case "EMPLOYEE FIRE" -> employeeService.fireEmployee();
+
+                    case "INCIDENT LIST" -> incidentService.listAllIncidents();
+                    case "INCIDENT COMPLETE" -> incidentService.completeIncident();
+                    case "INCIDENT EDIT" -> incidentService.editIncident();
 
                     case "PRODUCT LIST" -> productService.listProducts();
                     case "PRODUCT RESTOCK" -> productService.restockProduct();

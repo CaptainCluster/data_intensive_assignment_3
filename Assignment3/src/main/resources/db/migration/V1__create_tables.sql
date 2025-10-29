@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS Incident (
     id              SERIAL PRIMARY KEY,
     title           VARCHAR(255) NOT NULL,
     description     VARCHAR(255),
-    shopId          INT UNIQUE,
+    shopId          INT NOT NULL,
+    isHandled       BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (shopId) REFERENCES Shop(id)
 );
 
