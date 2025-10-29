@@ -15,5 +15,4 @@ public class ProductDTO {
     @NotNull private String name;
     private Integer price;
     @NotNull private Integer quantity;
-    private Integer warehouseId;
 }

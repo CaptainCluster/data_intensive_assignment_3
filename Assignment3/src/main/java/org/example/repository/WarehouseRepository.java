@@ -15,6 +15,26 @@ public class WarehouseRepository {
     @Resource private ClientConnection clientConnection;
     @Resource private DatabaseUtils databaseUtils;
 
+    public WarehouseDTO createWarehouse(WarehouseDTO warehouseDTO) {
+        if (!databaseUtils.isValidConnection()) {
+            return null;
+        }
+        return clientConnection
+                .getDslContext()
+                .insertInto(WAREHOUSE)
+                .columns(
+                        WAREHOUSE.SHOPID,
+                        WAREHOUSE.QUANTITY, WAREHOUSE.ISFULL
+                )
+                .values(
+                        warehouseDTO.getShopId(),
+                        warehouseDTO.getQuantity(), warehouseDTO.isFull()
+                )
+                .returning(WAREHOUSE.ID, WAREHOUSE.SHOPID,
+                        WAREHOUSE.QUANTITY, WAREHOUSE.ISFULL)
+                .fetchOneInto(WarehouseDTO.class);
+    }
+
     public List<WarehouseDTO> fetchAllWarehouses() {
         if (!databaseUtils.isValidConnection()) {
             return List.of();

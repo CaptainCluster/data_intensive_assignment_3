@@ -16,6 +16,19 @@ public class IncidentRepository {
     @Resource private ClientConnection clientConnection;
     @Resource private DatabaseUtils databaseUtils;
 
+    public IncidentDTO createIncident(IncidentDTO incidentDTO) {
+        if (!databaseUtils.isValidConnection()) {
+            return null;
+        }
+        return clientConnection
+                .getDslContext()
+                .insertInto(INCIDENT)
+                .columns(INCIDENT.TITLE,  INCIDENT.DESCRIPTION, INCIDENT.SHOPID, INCIDENT.ISHANDLED)
+                .values(incidentDTO.getTitle(), incidentDTO.getDescription(), incidentDTO.getShopId(), incidentDTO.getIsHandled())
+                .returning(INCIDENT.ID, INCIDENT.DESCRIPTION, INCIDENT.SHOPID, INCIDENT.ISHANDLED)
+                .fetchOneInto(IncidentDTO.class);
+    }
+
     public List<IncidentDTO> fetchAllIncidents() {
         if (!databaseUtils.isValidConnection()) {
             return List.of();

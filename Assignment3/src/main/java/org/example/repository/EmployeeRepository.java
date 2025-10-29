@@ -17,20 +17,17 @@ public class EmployeeRepository {
     @Resource private ClientConnection clientConnection;
     @Resource private DatabaseUtils databaseUtils;
 
-    public void createEmployee(EmployeeDTO employeeDTO) {
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
         if (employeeDTO == null || !databaseUtils.isValidConnection()) {
-            return;
+            return null;
         }
-        try {
-            clientConnection
-                    .getDslContext()
-                    .insertInto(EMPLOYEE)
-                    .columns(EMPLOYEE.NAME, EMPLOYEE.TITLE, EMPLOYEE.SALARY)
-                    .values(employeeDTO.getName(), employeeDTO.getTitle(), employeeDTO.getSalary())
-                    .execute();
-        } catch(Exception e) {
-            log.warn("Failed to create employee.");
-        }
+        return clientConnection
+                .getDslContext()
+                .insertInto(EMPLOYEE)
+                .columns(EMPLOYEE.NAME, EMPLOYEE.TITLE, EMPLOYEE.SALARY)
+                .values(employeeDTO.getName(), employeeDTO.getTitle(), employeeDTO.getSalary())
+                .returning(EMPLOYEE.ID, EMPLOYEE.NAME, EMPLOYEE.SALARY)
+                .fetchOneInto(EmployeeDTO.class);
     }
 
     public EmployeeDTO getEmployeeById(int employeeId) {

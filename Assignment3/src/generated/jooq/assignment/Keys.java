@@ -42,7 +42,6 @@ public class Keys {
     public static final UniqueKey<ProductRecord> PRODUCT_PKEY = Internal.createUniqueKey(Product.PRODUCT, DSL.name("product_pkey"), new TableField[] { Product.PRODUCT.ID }, true);
     public static final UniqueKey<ShopRecord> SHOP_PKEY = Internal.createUniqueKey(Shop.SHOP, DSL.name("shop_pkey"), new TableField[] { Shop.SHOP.ID }, true);
     public static final UniqueKey<WarehouseRecord> WAREHOUSE_PKEY = Internal.createUniqueKey(Warehouse.WAREHOUSE, DSL.name("warehouse_pkey"), new TableField[] { Warehouse.WAREHOUSE.ID }, true);
-    public static final UniqueKey<WarehouseRecord> WAREHOUSE_SHOPID_KEY = Internal.createUniqueKey(Warehouse.WAREHOUSE, DSL.name("warehouse_shopid_key"), new TableField[] { Warehouse.WAREHOUSE.SHOPID }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions

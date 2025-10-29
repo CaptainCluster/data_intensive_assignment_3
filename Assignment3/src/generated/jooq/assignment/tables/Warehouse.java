@@ -70,7 +70,7 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
     /**
      * The column <code>public.warehouse.shopid</code>.
      */
-    public final TableField<WarehouseRecord, Integer> SHOPID = createField(DSL.name("shopid"), SQLDataType.INTEGER, this, "");
+    public final TableField<WarehouseRecord, Integer> SHOPID = createField(DSL.name("shopid"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.warehouse.quantity</code>.
@@ -157,11 +157,6 @@ public class Warehouse extends TableImpl<WarehouseRecord> {
     @Override
     public UniqueKey<WarehouseRecord> getPrimaryKey() {
         return Keys.WAREHOUSE_PKEY;
-    }
-
-    @Override
-    public List<UniqueKey<WarehouseRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.WAREHOUSE_SHOPID_KEY);
     }
 
     @Override

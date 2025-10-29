@@ -16,6 +16,19 @@ public class ProductRepository {
     @Resource private ClientConnection clientConnection;
     @Resource private DatabaseUtils databaseUtils;
 
+    public ProductDTO createProduct(ProductDTO productDTO) {
+        if (!databaseUtils.isValidConnection()) {
+            return null;
+        }
+        return clientConnection
+                .getDslContext()
+                .insertInto(PRODUCT)
+                .columns(PRODUCT.NAME, PRODUCT.PRICE, PRODUCT.QUANTITY)
+                .values(productDTO.getName(), productDTO.getPrice(), productDTO.getQuantity())
+                .returning(PRODUCT.ID, PRODUCT.NAME, PRODUCT.PRICE, PRODUCT.QUANTITY)
+                .fetchOneInto(ProductDTO.class);
+    }
+
     public List<ProductDTO> getProducts() {
         if (!databaseUtils.isValidConnection()) {
             return List.of();

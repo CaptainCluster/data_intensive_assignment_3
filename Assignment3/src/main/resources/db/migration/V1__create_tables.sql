@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Shop (
 
 CREATE TABLE IF NOT EXISTS Warehouse (
     id              SERIAL PRIMARY KEY,
-    shopId          INT UNIQUE,
+    shopId          INT NOT NULL,
     quantity        INT NOT NULL,
     isFull          BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (shopId) REFERENCES Shop(id)

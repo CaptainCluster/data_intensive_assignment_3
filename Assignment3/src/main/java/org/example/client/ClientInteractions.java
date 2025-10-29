@@ -41,7 +41,6 @@ public class ClientInteractions {
                     case "STATUS" -> clientConnection.status();
 
                     case "EMPLOYEE LIST" -> employeeService.listEmployees();
-                    case "EMPLOYEE HIRE" -> employeeService.hireEmployee();
                     case "EMPLOYEE VACANT" -> employeeService.printVacantEmployees();
                     case "EMPLOYEE ASSIGN" -> employeeService.assignEmployee();
                     case "EMPLOYEE FIRE" -> employeeService.fireEmployee();

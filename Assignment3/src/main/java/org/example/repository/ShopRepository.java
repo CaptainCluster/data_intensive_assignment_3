@@ -17,20 +17,17 @@ public class ShopRepository {
     @Resource private ClientConnection clientConnection;
     @Resource private DatabaseUtils databaseUtils;
 
-    public void createShop(ShopDTO shopDTO) {
+    public ShopDTO createShop(ShopDTO shopDTO) {
         if (shopDTO == null || !databaseUtils.isValidConnection()) {
-            return;
+            return null;
         }
-        try {
-            clientConnection
+        return clientConnection
                     .getDslContext()
                     .insertInto(SHOP)
                     .columns(SHOP.NAME, SHOP.LOCATION)
                     .values(shopDTO.getName(), shopDTO.getLocation())
-                    .execute();
-        } catch (Exception e) {
-            log.warn("Failed to create shop.");
-        }
+                    .returning(SHOP.ID, SHOP.NAME, SHOP.LOCATION)
+                    .fetchOneInto(ShopDTO.class);
     }
 
     public List<ShopDTO> fetchAllShops() {

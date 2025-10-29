@@ -27,7 +27,7 @@ public class WarehouseService {
                             "ID - {} | Quantity - {} | Full - {}",
                             warehouseDTO.getId(),
                             warehouseDTO.getQuantity(),
-                            warehouseDTO.isFull() ? "FULL" : "NOT NULL"
+                            warehouseDTO.isFull() ? "FULL" : "NOT FULL"
                     );
         });
     }

@@ -17,35 +17,6 @@ public class EmployeeService {
     @Resource private ShopRepository shopRepository;
     private final Scanner scanner = new Scanner(System.in);
 
-    public void hireEmployee() {
-
-        log.info("What is the name of the employee: ");
-        String name = scanner.nextLine();
-
-        log.info("What will be their title: ");
-        String title = scanner.nextLine();
-
-        log.info("What will be their salary: ");
-
-        int salary;
-        try {
-            String salaryString = scanner.nextLine();
-            salary = Integer.parseInt(salaryString);
-        } catch (Exception e) {
-            log.warn("Error when parsing the salary. Cancelling the hiring process.");
-            return;
-        }
-
-        employeeRepository.createEmployee(
-                EmployeeDTO
-                        .builder()
-                        .name(name)
-                        .title(title)
-                        .salary(salary)
-                        .build()
-        );
-    }
-
     public void fireEmployee() {
         log.info("What is the ID of the employee to be fired: ");
         String idString = scanner.nextLine();
