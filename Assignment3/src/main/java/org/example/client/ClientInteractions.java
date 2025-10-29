@@ -8,6 +8,7 @@ import org.example.repository.ShopRepository;
 import org.example.service.EmployeeService;
 import org.example.service.ProductService;
 import org.example.service.ShopService;
+import org.example.service.WarehouseService;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -22,6 +23,7 @@ public class ClientInteractions {
     @Resource private ShopService shopService;
     @Resource private ShopRepository shopRepository;
     @Resource private ProductService productService;
+    @Resource private WarehouseService warehouseService;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -33,29 +35,37 @@ public class ClientInteractions {
             log.info("\nYour input: ");
             String clientInput = scanner.nextLine();
 
-            switch (clientInput.toUpperCase()) {
-                case "CONNECT" -> databaseManager.handleClientDatabaseSelection();
-                case "DATABASES" -> databaseManager.listDatabasesByName();
-                case "HELP" -> listCommands();
-                case "STATUS" -> clientConnection.status();
+            try {
+                switch (clientInput.toUpperCase()) {
+                    case "CONNECT" -> databaseManager.handleClientDatabaseSelection();
+                    case "DATABASES" -> databaseManager.listDatabasesByName();
+                    case "HELP" -> listCommands();
+                    case "STATUS" -> clientConnection.status();
 
-                case "EMPLOYEE LIST" -> employeeService.listEmployees();
-                case "EMPLOYEE HIRE" -> employeeService.hireEmployee();
-                case "EMPLOYEE VACANT" -> employeeService.printVacantEmployees();
-                case "EMPLOYEE ASSIGN" -> employeeService.assignEmployee();
-                case "EMPLOYEE FIRE" -> employeeService.fireEmployee();
+                    case "EMPLOYEE LIST" -> employeeService.listEmployees();
+                    case "EMPLOYEE HIRE" -> employeeService.hireEmployee();
+                    case "EMPLOYEE VACANT" -> employeeService.printVacantEmployees();
+                    case "EMPLOYEE ASSIGN" -> employeeService.assignEmployee();
+                    case "EMPLOYEE FIRE" -> employeeService.fireEmployee();
 
-                case "PRODUCT LIST" -> productService.listProducts();
-                case "PRODUCT RESTOCK" -> productService.restockProduct();
-                case "PRODUCT PRICE" -> productService.changeProductPrice();
+                    case "PRODUCT LIST" -> productService.listProducts();
+                    case "PRODUCT RESTOCK" -> productService.restockProduct();
+                    case "PRODUCT PRICE" -> productService.changeProductPrice();
 
-                case "SHOP LIST" -> shopService.listAllShops();
-                case "SHOP RENAME" -> shopService.renameShop();
-                case "SHOP RELOCATE" -> shopService.relocateShop();
+                    case "SHOP LIST" -> shopService.listAllShops();
+                    case "SHOP RENAME" -> shopService.renameShop();
+                    case "SHOP RELOCATE" -> shopService.relocateShop();
 
-                case "TEST" -> shopRepository.createShop(ShopDTO.builder().name("TEST_NAME").location("TEST_LOCATION").build());
-                case "EXIT" -> System.exit(0);
-                default -> log.warn("Invalid input detected!");
+                    case "WAREHOUSE LIST" -> warehouseService.listWarehouses();
+                    case "WAREHOUSE EXPAND" -> warehouseService.expandWarehouse();
+                    case "WAREHOUSE ASSIGN" -> warehouseService.assignWarehouseToShop();
+
+                    case "TEST" -> shopRepository.createShop(ShopDTO.builder().name("TEST_NAME").location("TEST_LOCATION").build());
+                    case "EXIT" -> System.exit(0);
+                    default -> log.warn("Invalid input detected!");
+                }
+            } catch (Exception e) {
+                log.warn("An error occurred when executing the last command. The error was: ", e);
             }
         }
     }
@@ -64,7 +74,7 @@ public class ClientInteractions {
         Map<String, String> commands = Map.of(
                 "CONNECT", "Connect to a database",
                 "DATABASES", "List databases",
-                "HELP", "List available commands",
+                "HELP", "List available core commands",
                 "STATUS", "Prints the status regarding current connection",
                 "EXIT", "End program"
         );
