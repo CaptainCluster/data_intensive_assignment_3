@@ -16,7 +16,7 @@ public class ShopService {
     public void listAllShops() {
         log.info("Here are the shops:");
         shopRepository.fetchAllShops().forEach(
-                shopDTO -> log.info("ID - {} | name - {} | location {}",
+                shopDTO -> log.info("ID - {} | name - {} | location - {}",
                         shopDTO.getId(), shopDTO.getName(), shopDTO.getLocation())
         );
     }

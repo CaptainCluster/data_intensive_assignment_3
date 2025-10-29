@@ -62,7 +62,6 @@ public class ClientInteractions {
                     case "WAREHOUSE EXPAND" -> warehouseService.expandWarehouse();
                     case "WAREHOUSE ASSIGN" -> warehouseService.assignWarehouseToShop();
 
-                    case "TEST" -> shopRepository.createShop(ShopDTO.builder().name("TEST_NAME").location("TEST_LOCATION").build());
                     case "EXIT" -> System.exit(0);
                     default -> log.warn("Invalid input detected!");
                 }
