@@ -80,7 +80,7 @@ public class Incident extends TableImpl<IncidentRecord> {
     /**
      * The column <code>public.incident.shopid</code>.
      */
-    public final TableField<IncidentRecord, Integer> SHOPID = createField(DSL.name("shopid"), SQLDataType.INTEGER, this, "");
+    public final TableField<IncidentRecord, Integer> SHOPID = createField(DSL.name("shopid"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.incident.ishandled</code>.
@@ -162,11 +162,6 @@ public class Incident extends TableImpl<IncidentRecord> {
     @Override
     public UniqueKey<IncidentRecord> getPrimaryKey() {
         return Keys.INCIDENT_PKEY;
-    }
-
-    @Override
-    public List<UniqueKey<IncidentRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.INCIDENT_SHOPID_KEY);
     }
 
     @Override

@@ -39,7 +39,6 @@ public class Keys {
     public static final UniqueKey<EmployeeRecord> EMPLOYEE_PKEY = Internal.createUniqueKey(Employee.EMPLOYEE, DSL.name("employee_pkey"), new TableField[] { Employee.EMPLOYEE.ID }, true);
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
     public static final UniqueKey<IncidentRecord> INCIDENT_PKEY = Internal.createUniqueKey(Incident.INCIDENT, DSL.name("incident_pkey"), new TableField[] { Incident.INCIDENT.ID }, true);
-    public static final UniqueKey<IncidentRecord> INCIDENT_SHOPID_KEY = Internal.createUniqueKey(Incident.INCIDENT, DSL.name("incident_shopid_key"), new TableField[] { Incident.INCIDENT.SHOPID }, true);
     public static final UniqueKey<ProductRecord> PRODUCT_PKEY = Internal.createUniqueKey(Product.PRODUCT, DSL.name("product_pkey"), new TableField[] { Product.PRODUCT.ID }, true);
     public static final UniqueKey<ShopRecord> SHOP_PKEY = Internal.createUniqueKey(Shop.SHOP, DSL.name("shop_pkey"), new TableField[] { Shop.SHOP.ID }, true);
     public static final UniqueKey<WarehouseRecord> WAREHOUSE_PKEY = Internal.createUniqueKey(Warehouse.WAREHOUSE, DSL.name("warehouse_pkey"), new TableField[] { Warehouse.WAREHOUSE.ID }, true);

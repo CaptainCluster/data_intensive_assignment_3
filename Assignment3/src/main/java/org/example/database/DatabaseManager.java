@@ -54,7 +54,7 @@ public class DatabaseManager {
         if (parsedInput > databases.size() || parsedInput < 1) {
             log.warn("A database of number {} does not exist. Connection failed.", parsedInput);
         }
-        establishConnectionForClient(parsedInput-1); // Minus 1 to convert into an index for list
+        establishConnectionForClient(parsedInput-1, Boolean.FALSE); // Minus 1 to convert into an index for list
     }
 
     public void listDatabasesByName() {
@@ -67,15 +67,23 @@ public class DatabaseManager {
         }
     }
 
-    private void establishConnectionForClient(int databaseIndex) {
+    public void establishConnectionForClient(int databaseIndex, boolean isUsedForMock) {
         try {
+            if (databaseIndex > databases.size()-1 || databaseIndex < 0) {
+                log.warn("The given number does not match a valid database number!");
+                return;
+            }
             clientConnection.disconnect();
             clientConnection.setDatabase(databases.get(databaseIndex));
-            log.info(clientConnection.getDatabase().getUrl());
+            if (!isUsedForMock) {
+                log.info(clientConnection.getDatabase().getUrl());
+            }
             clientConnection.setDslContext(DSL.using(
                     clientConnection.getDatabase().getConnection()
             ));
-            log.info("Connection has been established to database {}.", clientConnection.getDatabase().getName());
+            if (!isUsedForMock) {
+                log.info("Connection has been established to database {}.", clientConnection.getDatabase().getName());
+            }
         } catch (Exception e) {  // Mainly to catch issues due to handling via index
             clientConnection.disconnect();
             log.warn("Encountered an error when attempting to establish a connection to database: ", e);
