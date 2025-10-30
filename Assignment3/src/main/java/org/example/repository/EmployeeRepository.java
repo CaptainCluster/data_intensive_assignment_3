@@ -24,9 +24,9 @@ public class EmployeeRepository {
         return clientConnection
                 .getDslContext()
                 .insertInto(EMPLOYEE)
-                .columns(EMPLOYEE.NAME, EMPLOYEE.TITLE, EMPLOYEE.SALARY)
-                .values(employeeDTO.getName(), employeeDTO.getTitle(), employeeDTO.getSalary())
-                .returning(EMPLOYEE.ID, EMPLOYEE.NAME, EMPLOYEE.SALARY)
+                .columns(EMPLOYEE.NAME, EMPLOYEE.TITLE, EMPLOYEE.SALARY, EMPLOYEE.SHOPID)
+                .values(employeeDTO.getName(), employeeDTO.getTitle(), employeeDTO.getSalary(), employeeDTO.getShopId())
+                .returning(EMPLOYEE.ID, EMPLOYEE.NAME, EMPLOYEE.SALARY, EMPLOYEE.SHOPID)
                 .fetchOneInto(EmployeeDTO.class);
     }
 

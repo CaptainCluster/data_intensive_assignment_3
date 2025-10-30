@@ -359,7 +359,6 @@ public class MockdataUtils {
                 ShopDTO.builder().name("S-Market Sammonlahti").location("lappeen Rannat").build()
         );
 
-
         // Five products
         productRepository.createProduct(
                 ProductDTO.builder().name("Cucumber").price(1).quantity(20).build()
