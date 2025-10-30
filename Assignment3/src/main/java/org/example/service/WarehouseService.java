@@ -23,9 +23,12 @@ public class WarehouseService {
         log.info("Here is a list of all the warehouses: ");
         warehouseRepository.fetchAllWarehouses()
                 .forEach(warehouseDTO -> {
+                    ShopDTO shopDTO = shopRepository.fetchShopById(warehouseDTO.getShopId());
+                    String shopName = shopDTO != null ? shopDTO.getName() : "None (vacant)";
                     log.info(
-                            "ID - {} | Quantity - {} | Full - {}",
+                            "ID - {} | Shop - {} | Quantity - {} | Full - {}",
                             warehouseDTO.getId(),
+                            shopName,
                             warehouseDTO.getQuantity(),
                             warehouseDTO.isFull() ? "FULL" : "NOT FULL"
                     );

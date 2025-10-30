@@ -12,6 +12,7 @@ import java.util.Scanner;
 @Service
 public class ProductService {
     @Resource private ProductRepository productRepository;
+
     private final Scanner scanner = new Scanner(System.in);
 
     public void listProducts() {
@@ -63,6 +64,7 @@ public class ProductService {
             log.warn("Error when parsing the id. Cancelling the price changing process.");
             return;
         }
+        log.info("What will be the new price: ");
         int price;
         try {
             String priceString = scanner.nextLine();
