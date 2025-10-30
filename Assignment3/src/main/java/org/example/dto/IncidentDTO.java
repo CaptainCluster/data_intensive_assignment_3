@@ -15,5 +15,5 @@ public class IncidentDTO {
     @NotNull private String title;
     private String description;
     @NotNull private Integer shopId;
-    private Boolean isHandled;
+    private boolean isHandled;
 }
