@@ -40,15 +40,20 @@ public class EmployeeService {
         log.info("Here are all the employees: ");
         employeeRepository.selectAllEmployees()
                 .forEach((employeeDTO) -> {
-                    ShopDTO shopDTO = shopRepository.fetchShopById(employeeDTO.getShopId());
-                    String shopName = shopDTO != null ? shopDTO.getName() : "None (vacant)";
+                    String shopName = "None (vacant)";
+                    if (employeeDTO.getShopId() != null) {
+                        ShopDTO shopDTO = shopRepository.fetchShopById(employeeDTO.getShopId());
+                        shopName = shopDTO.getName();
+                    }
+
                     log.info(
-                            "id - {} | name - {} | title - {} | salary - {} | shop - {}",
+                            "id - {} | name - {} | title - {} | salary - {} | shop - {} {}",
                             employeeDTO.getId(),
                             employeeDTO.getName(),
                             employeeDTO.getTitle(),
                             employeeDTO.getSalary(),
-                            shopName
+                            shopName,
+                            employeeDTO.isFired() ? "| THIS EMPLOYEE HAS BEEN FIRED" : ""
                     );
                 });
     }

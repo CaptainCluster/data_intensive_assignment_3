@@ -64,10 +64,12 @@ public class IncidentService {
                 incidentDTO.getShopId()
         ).getName();
         log.info(
-                "ID - {} | Title - {} | Shop - {} ",
+                "ID - {} | Title - {} | Shop - {} | Solved - {} | Description - {}",
                 incidentDTO.getId(),
                 incidentDTO.getTitle(),
-                shopName
+                shopName,
+                incidentDTO.isHandled() ? "YES" : "NO",
+                incidentDTO.getDescription()
         );
     }
 
