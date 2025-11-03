@@ -12,6 +12,8 @@ Set up
 
 4. Now you can run the application. Jooq will automatically generate classes in a separate directory based on the tables.
 
+5. The mock data will be generated when the application runs. Each of the three databases will have their tables filled (at least 5 replicated and 5 fragmented rows per table)
+
 .env values
 ---
 Here are the variables
@@ -38,6 +40,7 @@ an IDE like Intellij IDEA.
 3. Slf4j - The tool I used for printing. (Project Lombok)
 4. Spring Boot - Used for easy usage of Java beans (services, repos, etc)
 5. Gradle - Utilizes gradle for configuration and commands
+
 
 
 
