@@ -14,7 +14,7 @@ Set up
 
 .env values
 ---
-Here are example variables
+Here are the variables
 
 >DB_URL_1=jdbc:postgresql://localhost:5432/db1
 >
@@ -38,5 +38,6 @@ an IDE like Intellij IDEA.
 3. Slf4j - The tool I used for printing. (Project Lombok)
 4. Spring Boot - Used for easy usage of Java beans (services, repos, etc)
 5. Gradle - Utilizes gradle for configuration and commands
+
 
 
