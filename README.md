@@ -1,5 +1,7 @@
 # Data-Intensive Systems Assignment 3
 
+<img width="346" height="249" alt="image" src="https://github.com/user-attachments/assets/fb6aa6a5-47a0-4929-9845-9a6bbb664e3a" />
+
 
 Set up
 ---
@@ -40,6 +42,10 @@ an IDE like Intellij IDEA.
 3. Slf4j - The tool I used for printing. (Project Lombok)
 4. Spring Boot - Used for easy usage of Java beans (services, repos, etc)
 5. Gradle - Utilizes gradle for configuration and commands
+
+
+
+
 
 
 
