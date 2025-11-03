@@ -29,7 +29,13 @@ Here are example variables
 
 Dependencies
 ---
+You need to have Postgresql and Java installed to run this application. I also recommend using 
+an IDE like Intellij IDEA.
+
+
 1. Flyway - A database migration/version control tool. Manages db table creation in this project.
 2. Jooq - Creates Java classes from the tables created with Flyway
 3. Slf4j - The tool I used for printing. (Project Lombok)
-4. Spring Boot - Used for easy usage of Java beans (services, repos, etc) 
+4. Spring Boot - Used for easy usage of Java beans (services, repos, etc)
+5. Gradle - Utilizes gradle for configuration and commands
+
