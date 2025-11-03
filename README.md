@@ -8,7 +8,7 @@ Set up
 
 2. Create three databases (db1, db2, db3)
 
-3. Run Flyway migrations with `gradlew`. Look into `build.gradle`. Example command: `./gradlew migrate1`
+3. Run Flyway migrations with `gradlew`. Look into `build.gradle`. You must do this individually for each database. Example command for db1: `./gradlew migrate1`
 
 4. Now you can run the application. Jooq will automatically generate classes in a separate directory based on the tables.
 
@@ -38,4 +38,5 @@ an IDE like Intellij IDEA.
 3. Slf4j - The tool I used for printing. (Project Lombok)
 4. Spring Boot - Used for easy usage of Java beans (services, repos, etc)
 5. Gradle - Utilizes gradle for configuration and commands
+
 
